@@ -47,50 +47,57 @@ namespace z1v1
                  guy.Out_info();
              }*/
 
-            /*   
-               Console.WriteLine("Enter amount of sportsmans");
-               int n = Convert.ToInt32(Console.ReadLine());
-               Random rnd = new Random(n);
-               string[] spr = { "Basketball", "Foolball", "Voleyball", "Light athletic", "Programming", "Chess" };
-               string[] nme = { "vasya", "kolya", "vitya", "vikusha", "boris", "genadiy", "anton" };
-               List<Sportsman> sportsmans = new List<Sportsman>();
-               for (int i = 0; i < n; i++)
-               {
-                   sportsmans.Add(new Sportsman());
-                   try
-                   {
-                       sportsmans[i].Age = rnd.Next() % 100 + 1;
-                       sportsmans[i].Height = rnd.Next() % 300 + 1;
-                       sportsmans[i].Weight = rnd.Next() % 200 + 1;
-                       sportsmans[i].Name = nme[rnd.Next() % nme.Length];
-                       int m = rnd.Next() % 5;
-                       for (int j = 0; j < m; j++)
-                           sportsmans[i][spr[rnd.Next() % spr.Length]] = new Sportsman.Award(rnd.Next() % 5, rnd.Next() % 5, rnd.Next() % 5);
-                   }
-                   catch
-                   {
-                       Console.WriteLine("Error");
-                       return;
-                   }
-               }
 
-               sportsmans.Sort();
-               for (int i = 0; i < n; i++)
-                   sportsmans[i].Out_info();
+            Console.WriteLine("Enter amount of sportsmans");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Random rnd = new Random(n);
+            string[] spr = { "Basketball", "Foolball", "Voleyball", "Light athletic", "Programming", "Chess" };
+            string[] nme = { "vasya", "kolya", "vitya", "vikusha", "boris", "genadiy", "anton" };
+            List<Sportsman> sportsmans = new List<Sportsman>();
+            for (int i = 0; i < n; i++)
+            {
+                Human human;
+                try
+                {
+                    human = new Human(age: rnd.Next() % 100 + 1,
+                                            weight: rnd.Next() % 300 + 1,
+                                            height: rnd.Next() % 200 + 1,
+                                            name: nme[rnd.Next() % nme.Length]);
+                }
+                catch
+                {
+                    Console.WriteLine("Error");
+                    return;
+                }
 
-               Sportsman.Award y = new Sportsman.Award(3, 5, 7);// Sportsman.SetAwards(3, 5, 7);
-               */
-            Human human = new Human(14,89,130,"Liza");
 
-            //Sportsman srt = new Sportsman(human,new Sportsman.SpecificSport());
-            Sportsman.SpecificSport srt = new Sportsman.SpecificSport();
+                int m = rnd.Next() % 5;
+                SpecificSport[] mas = new SpecificSport[m];
+                for (int j = 0; j < m; j++)
+                    mas[j] = new SpecificSport(new SpecificSport.Awards(rnd.Next() % 5, rnd.Next() % 5, rnd.Next() % 5), spr[rnd.Next() % spr.Length]);
+
+                sportsmans.Add(new Sportsman(human, mas));
+                //sportsmans[i][spr[rnd.Next() % spr.Length]] = new Sportsman.Award(rnd.Next() % 5, rnd.Next() % 5, rnd.Next() % 5);
+
+            }
+
+            sportsmans.Sort();
+            for (int i = 0; i < n; i++)
+                sportsmans[i].Out_info();
+        
+            //SpecificSport.Award y = new Sportsman.Award(3, 5, 7);// Sportsman.SetAwards(3, 5, 7);
+
+            /*Human human = new Human(14,89,130,"Liza");
+
+            Sportsman srt = new Sportsman(human,new SpecificSport(new SpecificSport.Awards(),"Gandball"));
+            //   SpecificSport srt = new SpecificSport();
             //srt.Out_info();
-            Console.WriteLine(srt.Sport);
+            srt.Out_info();
 
 
             //Console.WriteLine(sportsmans[0] > sportsmans[1]);
-
-
+            */
+            
         }
     }
 }

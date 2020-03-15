@@ -79,6 +79,8 @@ namespace z1v1
         {
             Console.WriteLine("*********");
             Console.WriteLine($"Name = {_name}\nAge = {_age}\nWeight = {_weight}\nHeigth = {_height}");
+         
         }
+        
     }
 }

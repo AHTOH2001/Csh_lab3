@@ -4,23 +4,20 @@ using System.Text;
 
 namespace z1v1
 {
-    public class SpecificSport
+    internal class SpecificSport
     {
-        private Award _award;
-        private SpecificSport(Award award, string sport)
+        private Awards _award;
+        public SpecificSport(Awards award, string sport)
         {
             _award = award;
             Sport = sport;
         }
-        private string Sport { get; private set; }
-        private Award Award
-        {
-            get => _award;
-        }
-        private struct Award
+        public string Sport { get;private set; }
+        public Awards Award => _award;
+        public struct Awards
         {
             private int _gold, _silver, _bronze;
-            public Award(int gold = 0, int silver = 0, int bronze = 0)
+            public Awards(int gold = 0, int silver = 0, int bronze = 0)
             {
                 if (gold >= 0) _gold = gold;
                 else _gold = 0;

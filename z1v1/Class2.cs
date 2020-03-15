@@ -11,7 +11,6 @@ namespace z1v1
         {
 
         }*/
-
         private List<SpecificSport> _SpecificSport = new List<SpecificSport>();
         // private List<string> _sports = new List<string>();
         // private List<Award> _awards = new List<Award>();
@@ -50,7 +49,7 @@ namespace z1v1
             }
             return -1;
         }
-        public Award this[string ind]
+        public SpecificSport.Awards this[string ind]
         {
             set
             {
@@ -71,7 +70,7 @@ namespace z1v1
             get
             {
                 int i = Find(ind);
-                return i == -1 ? new Award() : _SpecificSport[i].Award;
+                return i == -1 ? new SpecificSport.Awards() : _SpecificSport[i].Award;
             }
         }
 
