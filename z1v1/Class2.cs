@@ -5,41 +5,36 @@ using System.Text;
 
 namespace z1v1
 {
-    internal class Sportsman : Human, IComparable<Sportsman>
+    sealed
+        internal class Sportsman : Human, IComparable<Sportsman>
     {
-  /*      public struct SpecificSport
-        {
+        /*      public struct SpecificSport
+              {
 
-        }*/
+              }*/
         private List<SpecificSport> _SpecificSport = new List<SpecificSport>();
         // private List<string> _sports = new List<string>();
         // private List<Award> _awards = new List<Award>();
         private int _score;
-        public Sportsman(int age, int weight, int height, string name, params SpecificSport[] sports)
+        public Sportsman(int age, int weight, int height, string name, params SpecificSport[] sports) : base(age, weight, height, name)
         {
-            Age = age;
-            Weight = weight;
-            Height = height;
-            Name = name;
             for (int i = 0; i < sports.Length; i++)
                 this[sports[i].Sport] = sports[i].Award;
         }
-        public Sportsman(Human human, params SpecificSport[] sports)
+        public Sportsman(Human human, params SpecificSport[] sports) : base(human.Age, human.Weight, human.Height, human.Name)
         {
-            Age = human.Age;
-            Weight = human.Weight;
-            Height = human.Height;
-            Name = human.Name;
             for (int i = 0; i < sports.Length; i++)
                 this[sports[i].Sport] = sports[i].Award;
         }
-        ~Sportsman()
-        {
-            //suicide();
-            Console.WriteLine("Commited siucide");
-        }
+
+        //~Sportsman()
+        //{
+        //suicide();
+        // Console.WriteLine("Commited suicide");
+        //}
         public int Length() => _SpecificSport.Count;
-      //  public static Award SetAwards(int gold, int silver, int bronze) => new Award(gold, silver, bronze);
+        static public int CountScore(int gold, int silver, int bronze) => 3 * gold + 2 * silver + bronze;
+        //  public static Award SetAwards(int gold, int silver, int bronze) => new Award(gold, silver, bronze);
 
         public int Find(string value)
         {
@@ -57,14 +52,14 @@ namespace z1v1
                 if (i == -1)
                 {
                     _SpecificSport.Add(new SpecificSport(value, ind));
-                    _score += (_SpecificSport[Length() - 1].Award.GetGold() * 3) + (_SpecificSport[Length() - 1].Award.GetSilver() * 2) + _SpecificSport[Length() - 1].Award.GetBronze();
+                    _score += CountScore(_SpecificSport[Length() - 1].Award.GetGold(), _SpecificSport[Length() - 1].Award.GetSilver(), _SpecificSport[Length() - 1].Award.GetBronze());
                 }
                 else
                 {
-                    _score -= (_SpecificSport[i].Award.GetGold() * 3) + (_SpecificSport[i].Award.GetSilver() * 2) + _SpecificSport[i].Award.GetBronze();
+                    _score -= CountScore(_SpecificSport[i].Award.GetGold(), _SpecificSport[i].Award.GetSilver(), _SpecificSport[i].Award.GetBronze());
                     _SpecificSport.RemoveAt(i);
                     _SpecificSport.Insert(i, new SpecificSport(value, ind));
-                    _score += (_SpecificSport[i].Award.GetGold() * 3) + (_SpecificSport[i].Award.GetSilver() * 2) + _SpecificSport[i].Award.GetBronze();
+                    _score += CountScore(_SpecificSport[i].Award.GetGold(), _SpecificSport[i].Award.GetSilver(), _SpecificSport[i].Award.GetBronze());
                 }
             }
             get
@@ -74,9 +69,9 @@ namespace z1v1
             }
         }
 
-        public new void Out_info()
+        public new void OutInfo()
         {
-            base.Out_info();
+            base.OutInfo();
             for (int i = 0; i < Length(); i++)
             {
                 //Console.WriteLine($"{_sports[i]}: {_awards[i]}\n");

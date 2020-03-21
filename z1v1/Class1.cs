@@ -19,10 +19,10 @@ namespace z1v1
         {
 
         }
-        ~Human()
-        {
-            Console.WriteLine($"{_name} commited suicide");
-        }
+       // ~Human()
+        //{
+            //   Console.WriteLine($"{_name} commited suicide");
+        //}
         public int Age
         {
             set
@@ -60,27 +60,29 @@ namespace z1v1
                 for (int i = 0; i < value.Length; i++)
                     if (!(value[i] >= 'A' && value[i] <= 'Z') && !(value[i] >= 'a' && value[i] <= 'z'))
                         throw new InvalidOperationException();
-                    
-                if (value.Length == 0)
-                {
-                    Console.WriteLine("Wrong name");
-                    return;
-                }
+
+                if (value.Length == 0) throw new InvalidOperationException();
                 _name = value;
-                if (!(value[0] >= 'A' && value[0] <= 'Z'))
-                {
-                    _name = _name.Substring(1);
-                    _name = _name.Insert(0, ((char)(value[0] - 'a' + 'A')).ToString());
-                }
             }
-            get => _name;
+            get => FixName(_name);
         }
-        public void Out_info()
+        static public string FixName(string value)
+        {
+            StringBuilder name = new StringBuilder();
+            if (value[0] >= 'A' && value[0] <= 'Z') name.Append(value[0]);
+            else name.Append((char)(value[0]-'a'+'A'));
+
+            for (int i = 1; i < value.Length; i++)
+                if (value[i] >= 'A' && value[i] <= 'Z') name.Append((char)(value[i] - 'A' + 'a'));
+                else name.Append(value[i]);
+            return (name.ToString());
+        }
+        public void OutInfo()
         {
             Console.WriteLine("*********");
             Console.WriteLine($"Name = {_name}\nAge = {_age}\nWeight = {_weight}\nHeigth = {_height}");
-         
+
         }
-        
+
     }
 }

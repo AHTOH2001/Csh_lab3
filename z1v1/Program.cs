@@ -52,7 +52,7 @@ namespace z1v1
             int n = Convert.ToInt32(Console.ReadLine());
             Random rnd = new Random(n);
             string[] spr = { "Basketball", "Foolball", "Voleyball", "Light athletic", "Programming", "Chess" };
-            string[] nme = { "vasya", "kolya", "vitya", "vikusha", "boris", "genadiy", "anton" };
+            string[] nme = { "vasya", "kolya", "vitya", "VikuSHa", "boris", "genadiy", "anton" };
             List<Sportsman> sportsmans = new List<Sportsman>();
             for (int i = 0; i < n; i++)
             {
@@ -60,9 +60,9 @@ namespace z1v1
                 try
                 {
                     human = new Human(age: rnd.Next() % 100 + 1,
-                                            weight: rnd.Next() % 300 + 1,
-                                            height: rnd.Next() % 200 + 1,
-                                            name: nme[rnd.Next() % nme.Length]);
+                                      weight: rnd.Next() % 300 + 1,
+                                      height: rnd.Next() % 200 + 1,
+                                      name: nme[rnd.Next() % nme.Length]);
                 }
                 catch
                 {
@@ -83,8 +83,10 @@ namespace z1v1
 
             sportsmans.Sort();
             for (int i = 0; i < n; i++)
-                sportsmans[i].Out_info();
-        
+                sportsmans[i].OutInfo();
+
+            Sportsman lol = new Sportsman(5, 12, 25, "Kolka");
+
             //SpecificSport.Award y = new Sportsman.Award(3, 5, 7);// Sportsman.SetAwards(3, 5, 7);
 
             /*Human human = new Human(14,89,130,"Liza");
@@ -97,7 +99,7 @@ namespace z1v1
 
             //Console.WriteLine(sportsmans[0] > sportsmans[1]);
             */
-            
+
         }
     }
 }

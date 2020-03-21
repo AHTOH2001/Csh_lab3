@@ -12,7 +12,7 @@ namespace z1v1
             _award = award;
             Sport = sport;
         }
-        public string Sport { get;private set; }
+        public string Sport { get; private set; }
         public Awards Award => _award;
         public struct Awards
         {
